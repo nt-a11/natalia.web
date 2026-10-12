@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pétalo — Maquillaje</title>
+<meta name="description" content="Labiales, sombras, rubores y bases para todo tipo de piel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#FBF3F6;
+  --ink:#2A0D26;
+  --accent:#B0124F;
+  --accent-dark:#7A0C36;
+  --blush:#F4D3E0;
+  --peach:#F2A488;
+  --plum:#7A1F4B;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'DM Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+a{color:var(--accent)}
+a:hover{color:var(--accent-dark)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.row{display:flex;flex-wrap:wrap;gap:20px}
+.col{flex:1 1 240px;min-width:0}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.5vw,52px);letter-spacing:-.02em}
+
+/* nav */
+.nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;padding-bottom:20px}
+.brand{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.02em}
+.nav-links{display:flex;flex-wrap:wrap;gap:28px}
+.nav-links a{color:var(--ink);text-decoration:none;font-weight:500}
+.nav-links a:hover{color:var(--accent)}
+.cart{width:48px;height:48px;border-radius:50%;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid transparent}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-dark);color:#fff}
+.btn-outline{border-color:var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:#fff}
+
+/* hero */
+.hero{display:flex;flex-wrap:wrap;align-items:center;gap:56px;padding-top:40px;padding-bottom:72px}
+.hero-text{flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:28px;align-items:flex-start}
+.eyebrow{font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(44px,7vw,88px);line-height:.98;letter-spacing:-.03em}
+.hero p{max-width:520px;font-size:19px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+.lineup{flex:1 1 380px;min-width:0;display:flex;align-items:flex-end;justify-content:center;gap:14px;height:460px;padding:32px;border-radius:40px;background:var(--blush)}
+.lineup span{width:18%;max-width:64px;border-radius:32px 32px 10px 10px}
+
+/* categories */
+.section{padding-top:24px;padding-bottom:80px;display:flex;flex-direction:column;gap:32px}
+.cat{display:flex;flex-direction:column;gap:14px}
+.cat-art{height:200px;border-radius:28px;display:flex;align-items:center;justify-content:center}
+.cat h3{font-family:var(--display);font-weight:600;font-size:24px}
+.cat a{font-weight:700;text-decoration:none}
+
+/* products */
+.band-white{background:#fff}
+.band-white .section{padding-top:80px}
+.head-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px}
+.head-row a{font-weight:700;text-decoration:none}
+.product{display:flex;flex-direction:column;gap:10px}
+.product-art{height:260px;border-radius:28px;display:flex;align-items:flex-end;padding:18px;gap:8px}
+.dot{width:28px;height:28px;border-radius:50%}
+.product h3{font-size:19px;font-weight:700}
+.price{font-weight:700}
+
+/* shade picker */
+.tone{background:var(--ink);color:#fff}
+.tone .wrap{padding-top:88px;padding-bottom:88px;display:flex;flex-wrap:wrap;align-items:center;gap:56px}
+.preview{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+.preview-circle{width:240px;height:240px;border-radius:50%;transition:background .25s}
+.preview h3{font-family:var(--display);font-weight:800;font-size:40px;letter-spacing:-.02em}
+.preview p{max-width:360px;color:var(--blush)}
+.tone-text{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.tone-text .eyebrow{color:var(--peach)}
+.tone-text h2{line-height:1.05}
+.tone-text p{color:var(--blush)}
+.swatches{display:flex;flex-wrap:wrap;gap:18px}
+.swatch{width:64px;height:64px;border-radius:50%;border:0;cursor:pointer;transition:box-shadow .15s}
+.swatch[aria-pressed="true"]{box-shadow:0 0 0 3px var(--ink),0 0 0 6px #fff}
+.swatch:focus-visible{outline-color:#fff}
+
+/* looks */
+.look{flex:1 1 300px;min-width:0;padding:32px;border-radius:32px;display:flex;flex-direction:column;gap:14px}
+.look .num{font-family:var(--display);font-weight:800;font-size:56px;line-height:1;color:var(--accent)}
+.look h3{font-family:var(--display);font-weight:600;font-size:26px}
+.look a{font-weight:700;text-decoration:none}
+
+/* newsletter */
+.news{background:var(--peach)}
+.news .wrap{padding-top:64px;padding-bottom:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px}
+.news-text{flex:1 1 360px;display:flex;flex-direction:column;gap:10px}
+.news h2{font-size:clamp(28px,4vw,44px)}
+.news-form{flex:1 1 380px;display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px}
+.field{flex:1 1 220px;display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:700;font-size:15px}
+.field input{height:52px;padding:0 20px;border-radius:999px;border:2px solid var(--ink);background:#fff;color:var(--ink);font:inherit}
+.news button{height:52px;padding:0 28px;border-radius:999px;border:0;background:var(--ink);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.news button:hover{background:#4a1c43}
+.thanks{font-weight:700;min-height:1.5em}
+
+/* footer */
+footer{background:var(--ink);color:var(--blush)}
+footer .wrap{padding-top:56px;padding-bottom:56px;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between}
+footer .fcol{flex:1 1 160px;display:flex;flex-direction:column;gap:10px}
+footer .brand,footer strong{color:#fff}
+footer a{color:var(--blush)}
+footer a:hover{color:#fff}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="wrap nav">
+  <div class="brand">Pétalo</div>
+  <nav class="nav-links" aria-label="Principal">
+    <a href="#categorias">Categorías</a>
+    <a href="#destacados">Destacados</a>
+    <a href="#tono">Tu tono</a>
+    <a href="#looks">Looks</a>
+  </nav>
+  <button class="cart" aria-label="Abrir carrito">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+  </button>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div class="hero-text">
+      <div class="eyebrow">Nueva colección de temporada</div>
+      <h1>Color que se siente como tú.</h1>
+      <p>Labiales, sombras, rubores y bases para que cada día elijas cómo quieres verte. Descubre tonos pensados para todo tipo de piel.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#destacados">Comprar ahora</a>
+        <a class="btn btn-outline" href="#tono">Encuentra tu tono</a>
+      </div>
+    </div>
+    <div class="lineup" aria-hidden="true">
+      <span style="height:210px;background:#C98B8B"></span>
+      <span style="height:320px;background:#B0124F"></span>
+      <span style="height:390px;background:#7A1F4B"></span>
+      <span style="height:270px;background:#F2A488"></span>
+      <span style="height:340px;background:#A5607E"></span>
+    </div>
+  </section>
+
+  <section id="categorias" class="wrap section">
+    <h2>Elige por categoría</h2>
+    <div class="row">
+      <div class="col cat">
+        <div class="cat-art" style="background:#B0124F"><div style="width:96px;height:56px;border-radius:48px 48px 56px 56px;background:#F4D3E0"></div></div>
+        <h3>Labios</h3>
+        <p>Mates, cremosos y con brillo.</p>
+        <a href="#destacados">Ver labiales</a>
+      </div>
+      <div class="col cat">
+        <div class="cat-art" style="background:#7A1F4B"><div style="width:110px;height:52px;border-radius:50%;background:#F2A488"></div></div>
+        <h3>Ojos</h3>
+        <p>Sombras, delineadores y pestañas.</p>
+        <a href="#destacados">Ver ojos</a>
+      </div>
+      <div class="col cat">
+        <div class="cat-art" style="background:#F2A488"><div style="width:100px;height:100px;border-radius:50%;background:#FBF3F6"></div></div>
+        <h3>Rostro</h3>
+        <p>Bases, correctores y rubores.</p>
+        <a href="#destacados">Ver rostro</a>
+      </div>
+      <div class="col cat">
+        <div class="cat-art" style="background:#A5607E"><div style="width:120px;height:18px;border-radius:12px;background:#2A0D26;transform:rotate(-8deg)"></div></div>
+        <h3>Cejas</h3>
+        <p>Lápices, geles y pomadas.</p>
+        <a href="#destacados">Ver cejas</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="destacados" class="band-white">
+    <section class="wrap section">
+      <div class="head-row">
+        <h2>Los favoritos del momento</h2>
+        <a href="#">Ver todo el catálogo</a>
+      </div>
+      <div class="row">
+        <article class="col product">
+          <div class="product-art" style="background:#F4D3E0">
+            <span class="dot" style="background:#B0124F"></span><span class="dot" style="background:#7A1F4B"></span><span class="dot" style="background:#C98B8B"></span>
+          </div>
+          <h3>Labial mate aterciopelado</h3>
+          <p>Acabado suave de larga duración.</p>
+          <p class="price">Q85</p>
+          <a class="btn btn-primary" href="#">Ver producto</a>
+        </article>
+        <article class="col product">
+          <div class="product-art" style="background:#E9D2C8">
+            <span class="dot" style="background:#F2A488"></span><span class="dot" style="background:#A5607E"></span><span class="dot" style="background:#7A1F4B"></span>
+          </div>
+          <h3>Paleta de sombras Atardecer</h3>
+          <p>Tonos cálidos para mirada de día o de noche.</p>
+          <p class="price">Q165</p>
+          <a class="btn btn-primary" href="#">Ver producto</a>
+        </article>
+        <article class="col product">
+          <div class="product-art" style="background:#F7E3D6">
+            <span class="dot" style="background:#F1D2BC"></span><span class="dot" style="background:#D9A98B"></span><span class="dot" style="background:#A7694A"></span>
+          </div>
+          <h3>Base Piel Real</h3>
+          <p>Cobertura modulable, en varios tonos.</p>
+          <p class="price">Q145</p>
+          <a class="btn btn-primary" href="#">Ver producto</a>
+        </article>
+        <article class="col product">
+          <div class="product-art" style="background:#F6D9CF">
+            <span class="dot" style="background:#F0867A"></span><span class="dot" style="background:#C65A73"></span><span class="dot" style="background:#F2A488"></span>
+          </div>
+          <h3>Rubor en crema Mejilla</h3>
+          <p>Se difumina con los dedos para un efecto natural.</p>
+          <p class="price">Q95</p>
+          <a class="btn btn-primary" href="#">Ver producto</a>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <section id="tono" class="tone">
+    <div class="wrap">
+      <div class="preview" aria-live="polite">
+        <div class="preview-circle" id="preview-circle" style="background:#7A1F4B"></div>
+        <h3 id="preview-name">Ciruela</h3>
+        <p id="preview-desc">Un morado profundo y elegante, ideal para noches y looks con carácter.</p>
+      </div>
+      <div class="tone-text">
+        <div class="eyebrow">Prueba el color</div>
+        <h2>Encuentra tu tono ideal.</h2>
+        <p>Toca un color para verlo en grande y conocer su nombre. Así sabes cuál combina con tu look antes de comprar.</p>
+        <div class="swatches" id="swatches"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="looks" class="wrap section" style="padding-top:88px;padding-bottom:88px">
+    <h2>Looks para inspirarte</h2>
+    <div class="row">
+      <div class="look" style="background:#F7E3D6">
+        <div class="num">01</div>
+        <h3>Look de día</h3>
+        <p>Piel fresca, rubor en crema y labios nude para empezar la mañana sin complicaciones.</p>
+        <a href="#">Ver paso a paso</a>
+      </div>
+      <div class="look" style="background:#F4D3E0">
+        <div class="num">02</div>
+        <h3>Look de noche</h3>
+        <p>Sombras ahumadas en tonos ciruela y un labial profundo para destacar.</p>
+        <a href="#">Ver paso a paso</a>
+      </div>
+      <div class="look" style="background:#E7D3E8">
+        <div class="num">03</div>
+        <h3>Look de fiesta</h3>
+        <p>Delineado gráfico, brillo en los párpados y labios rojo cereza.</p>
+        <a href="#">Ver paso a paso</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="news">
+    <div class="wrap">
+      <div class="news-text">
+        <h2>Recibe novedades y tutoriales</h2>
+        <p>Suscríbete y sé la primera en conocer los lanzamientos.</p>
+      </div>
+      <div style="flex:1 1 380px">
+        <div class="news-form">
+          <div class="field">
+            <label for="correo">Tu correo</label>
+            <input id="correo" type="email" placeholder="nombre@correo.com" autocomplete="email">
+          </div>
+          <button type="button" id="suscribir">Suscribirme</button>
+        </div>
+        <p class="thanks" id="thanks" role="status"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcol">
+      <div class="brand">Pétalo</div>
+      <p>Maquillaje para expresar quién eres.</p>
+    </div>
+    <div class="fcol">
+      <strong>Tienda</strong>
+      <a href="#categorias">Categorías</a>
+      <a href="#destacados">Destacados</a>
+      <a href="#tono">Tu tono</a>
+    </div>
+    <div class="fcol">
+      <strong>Ayuda</strong>
+      <a href="#">Envíos y devoluciones</a>
+      <a href="#">Preguntas frecuentes</a>
+      <a href="#">Contacto: [TU CORREO]</a>
+    </div>
+    <div class="fcol">
+      <strong>Síguenos</strong>
+      <a href="#">Instagram @natalia</a>
+      <a href="#">TikTok @natalia</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var shades = [
+    { name: 'Ciruela', hex: '#7A1F4B', desc: 'Un morado profundo y elegante, ideal para noches y looks con carácter.' },
+    { name: 'Rojo cereza', hex: '#B3122D', desc: 'El rojo clásico con un toque jugoso. Va con todo.' },
+    { name: 'Rosa nude', hex: '#C98B8B', desc: 'Un nude rosado y suave para el uso diario.' },
+    { name: 'Malva', hex: '#A5607E', desc: 'Un tono apagado entre rosa y lila, sofisticado y fácil de llevar.' },
+    { name: 'Durazno', hex: '#F2A488', desc: 'Cálido y luminoso, da un aire fresco y veraniego.' },
+    { name: 'Fucsia', hex: '#C2185B', desc: 'Intenso y atrevido, para quienes quieren ser el centro de atención.' }
+  ];
+  var box = document.getElementById('swatches');
+  var circle = document.getElementById('preview-circle');
+  var nameEl = document.getElementById('preview-name');
+  var descEl = document.getElementById('preview-desc');
+  var buttons = [];
+
+  function pick(i) {
+    var s = shades[i];
+    circle.style.background = s.hex;
+    nameEl.textContent = s.name;
+    descEl.textContent = s.desc;
+    buttons.forEach(function (b, j) { b.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
+  }
+
+  shades.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'swatch';
+    b.style.background = s.hex;
+    b.setAttribute('aria-label', s.name);
+    b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    b.addEventListener('click', function () { pick(i); });
+    box.appendChild(b);
+    buttons.push(b);
+  });
+
+  document.getElementById('suscribir').addEventListener('click', function () {
+    var input = document.getElementById('correo');
+    var msg = document.getElementById('thanks');
+    if (input.value && input.checkValidity()) {
+      msg.textContent = '¡Gracias por suscribirte!';
+      input.value = '';
+    } else {
+      msg.textContent = 'Escribe un correo válido, por ejemplo nombre@correo.com.';
+    }
+  });
+})();
+</script>
+</body>
+</html>
